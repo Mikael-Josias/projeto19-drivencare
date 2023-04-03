@@ -8,6 +8,11 @@ async function create (name) {
     return id;
 }
 
+async function getAll () {
+    return await specialtiesRepository.getAll();
+}
+
 export default {
-    create
+    create,
+    getAll
 }

@@ -7,6 +7,12 @@ function create (name) {
     );
 }
 
+function getAll () {
+    return db.query(
+        `SELECT * FROM specialties;`
+    );
+}
+
 function getByName (name) {
     return db.query(
         `SELECT * FROM specialties WHERE name = $1;`,
@@ -16,5 +22,6 @@ function getByName (name) {
 
 export default {
     create,
+    getAll,
     getByName
 }
