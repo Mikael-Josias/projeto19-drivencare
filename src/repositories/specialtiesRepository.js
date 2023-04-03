@@ -20,8 +20,16 @@ function getByName (name) {
     );
 }
 
+function getById (id) {
+    return db.query(
+        `SELECT * FROM specialties WHERE id = $1;`,
+        [id]
+    );
+}
+
 export default {
     create,
     getAll,
-    getByName
+    getByName,
+    getById
 }
