@@ -1,8 +1,10 @@
 import specialtiesRepository from "../repositories/specialtiesRepository.js";
+import sessionsRepository from "../repositories/sessionsRepository.js";
 import doctorsRepository from "../repositories/doctorsRepository.js";
 import addressRepository from "../repositories/addressRepository.js";
 import userRepository from "../repositories/userRepository.js";
 import errors from "../errors/index.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 10;
@@ -25,6 +27,22 @@ async function create (doctorData) {
     return doctor;
 }
 
+async function signIn (userData) {
+    const { rows: [user], rowCount: emailExists } = await userRepository.login(userData.email);
+    if (emailExists !== 1) throw errors.conflictError("Email does not exist");
+
+    const {rows: [doctor]} = await doctorsRepository.getByUserId(user.id);
+    if (!doctor) throw errors.conflictError("User has no permission");
+
+    if (!bcrypt.compareSync(userData.password, user.password)) throw errors.conflictError("Password is not correct");
+
+    const {rows: [session]} = await sessionsRepository.create(user.id);
+
+    const token = jwt.sign(session.id, process.env.PRIVATE_KEY);
+    return {token, doctor};
+}
+
 export default {
-    create
+    create,
+    signIn
 }

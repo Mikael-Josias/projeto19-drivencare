@@ -6,5 +6,6 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/create", validateSchemasMiddleware(schemas.doctorsSignUpSchema), doctorsController.create);
+router.post("/signin", validateSchemasMiddleware(schemas.signInSchema), doctorsController.signIn);
 
 export default router;

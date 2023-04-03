@@ -17,7 +17,15 @@ function getByEmail (email) {
     );
 }
 
+function getByUserId (userId) {
+    return db.query(
+        `SELECT * FROM doctors WHERE user_id = $1;`,
+        [userId]
+    );
+}
+
 export default {
     create,
-    getByEmail
+    getByEmail,
+    getByUserId
 }
