@@ -6,5 +6,6 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/create", validateSchemasMiddleware(schemas.specialtySchema), specialtiesController.create);
+router.get("/all", specialtiesController.getAll);
 
 export default router;

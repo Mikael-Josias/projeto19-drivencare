@@ -10,6 +10,16 @@ async function create (req, res, next) {
     }
 }
 
+async function getAll (req, res, next) {
+    try {
+        const {rows: data} = await specialtiesService.getAll();
+        res.send(data);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
-    create
+    create,
+    getAll
 }
