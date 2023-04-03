@@ -14,7 +14,15 @@ function getByEmail (email) {
     );
 }
 
+function login (email) {
+    return db.query(
+        `SELECT * FROM users WHERE email = $1;`,
+        [email]
+    );
+}
+
 export default {
     create,
-    getByEmail
+    getByEmail,
+    login
 }

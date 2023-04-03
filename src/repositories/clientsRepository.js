@@ -14,7 +14,15 @@ function getByCpf (cpf) {
     );
 }
 
+function getByUserId (userId) {
+    return db.query(
+        `SELECT * FROM clients WHERE user_id = $1;`,
+        [userId]
+    );
+}
+
 export default {
     create,
-    getByCpf
+    getByCpf,
+    getByUserId
 }
