@@ -26,8 +26,14 @@ const clientSignUpSchema = Joi.object({
     cpf: Joi.string().length(11).required()
 });
 
+const signInSchema = Joi.object({
+    email: Joi.string().max(100).email().required(),
+    password: Joi.string().min(6).required(),
+});
+
 export default {
     specialtySchema,
     doctorsSignUpSchema,
-    clientSignUpSchema
+    clientSignUpSchema,
+    signInSchema
 }
