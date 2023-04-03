@@ -18,7 +18,18 @@ async function signIn (req, res, next) {
     }
 }
 
+async function searchDoctor (req, res, next) {
+    const {name, specialtyId, city} = req.query;
+    try {
+        const doctors = await doctorsService.searchDoctors(name, specialtyId, city);
+        res.send(doctors);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
     create,
-    signIn
+    signIn,
+    searchDoctor
 }

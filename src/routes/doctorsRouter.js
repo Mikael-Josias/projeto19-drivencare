@@ -7,5 +7,6 @@ const router = Router();
 
 router.post("/create", validateSchemasMiddleware(schemas.doctorsSignUpSchema), doctorsController.create);
 router.post("/signin", validateSchemasMiddleware(schemas.signInSchema), doctorsController.signIn);
+router.get("/search/", doctorsController.searchDoctor);
 
 export default router;

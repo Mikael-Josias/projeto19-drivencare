@@ -42,7 +42,22 @@ async function signIn (userData) {
     return {token, doctor};
 }
 
+async function searchDoctors(name, specialtyId, city) {
+    let {rows: doctors} = await doctorsRepository.listByName(name, city);
+
+    if(!isNaN(specialtyId) && Number(specialtyId) !== 0) {
+        doctors = doctors.filter((doc) => {
+            if (doc.specialty_id === Number(specialtyId)) {
+                return doc;
+            }
+        });
+    }
+
+    return doctors;
+}
+
 export default {
     create,
-    signIn
+    signIn,
+    searchDoctors
 }

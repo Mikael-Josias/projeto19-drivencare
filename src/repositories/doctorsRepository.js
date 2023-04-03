@@ -24,8 +24,21 @@ function getByUserId (userId) {
     );
 }
 
+function listByName (name, city) {
+    return db.query(
+        `
+            SELECT d.*, s.name AS specialty, a.*
+            FROM doctors AS d JOIN specialties AS s ON d.specialty_id = s.id
+            JOIN address AS a ON d.address_id = a.id
+            WHERE d.name LIKE '%' || $1 || '%' AND a.city LIKE '%' || $2 || '%';
+        `,
+        [name || "", city || ""]
+    );
+}
+
 export default {
     create,
     getByEmail,
-    getByUserId
+    getByUserId,
+    listByName
 }
