@@ -12,4 +12,9 @@ export default function handleApplicationErrors(err, req, res, next) {
             .status(httpStatus.CONFLICT)
             .send({ message: err.message, specialty: err.specialty });
     }
+
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: "InternalServerError",
+        message: "Internal Server Error",
+    });
 }
