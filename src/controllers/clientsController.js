@@ -9,6 +9,16 @@ async function create (req, res, next) {
     }
 }
 
+async function signIn (req, res, next) {
+    try {
+        const data = await clientsService.signIn(req.body);
+        res.status(201).send(data);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
-    create
+    create,
+    signIn
 }

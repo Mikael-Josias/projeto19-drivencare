@@ -6,5 +6,6 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/create", validateSchemasMiddleware(schemas.clientSignUpSchema), clientsController.create);
+router.post("/signin", validateSchemasMiddleware(schemas.signInSchema), clientsController.signIn);
 
 export default router;
