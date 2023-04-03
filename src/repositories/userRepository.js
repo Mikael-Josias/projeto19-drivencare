@@ -7,6 +7,14 @@ function create (email, password) {
     );
 }
 
+function getByEmail (email) {
+    return db.query(
+        `SELECT id FROM users WHERE email = $1`,
+        [email]
+    );
+}
+
 export default {
-    create
+    create,
+    getByEmail
 }
