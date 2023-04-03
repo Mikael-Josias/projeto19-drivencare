@@ -6,6 +6,14 @@ function conflictError(message) {
     }
 }
 
+function duplicateEmailError(email) {
+    return {
+        name: "DuplicateEmailError",
+        message: "There is already an user with given email",
+        email
+    }
+}
+
 function duplicateSpecialtiesError(specialty) {
     return {
         name: "DuplicateSpecialtiesError",
@@ -16,5 +24,6 @@ function duplicateSpecialtiesError(specialty) {
 
 export default {
     conflictError,
+    duplicateEmailError,
     duplicateSpecialtiesError
 }
